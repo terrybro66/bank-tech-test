@@ -12,4 +12,10 @@ describe("Account", () => {
   test("should initialise with empty array", () => {
     expect(account.transactions).toEqual([]);
   });
+  test("should be able to add a transaction", () => {
+    console.log(account.transactions);
+
+    account.addTransaction();
+    expect(account.transactions).toHaveLength(1);
+  });
 });
