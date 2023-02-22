@@ -1,4 +1,5 @@
 const Account = require("./app.js");
+const Transaction = require("./transaction.js");
 
 describe("Account", () => {
   let account;
@@ -24,5 +25,20 @@ describe("Account", () => {
     const expectedStatement =
       "date || credit || debit || balance\n13/11/2009 || 22 || || 22\n22/02/2023 || || -13 || 9\n";
     expect(statement).toBe(expectedStatement);
+  });
+  test("should be able to format Date object to dd/mm/yyyy", () => {
+    account.addTransaction(22);
+    let transaction = new Transaction();
+    const date = transaction.formatDate(new Date());
+    const dateRegex = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+
+    expect(dateRegex.test(date)).toBe(true);
+  });
+  test("should be able to create transaction object", () => {
+    account.addTransaction(22);
+    let transaction = new Transaction(33, "11/11/2000");
+    const obj = transaction.makeObj();
+
+    expect(typeof obj).toBe("object");
   });
 });

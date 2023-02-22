@@ -15,6 +15,7 @@ class Account {
   printStatement() {
     const statement = new Statement(this.transactions);
     const printOut = statement.generateStatement();
+    return printOut;
     console.log(printOut);
   }
 }
