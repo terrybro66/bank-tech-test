@@ -1,14 +1,21 @@
 const Transaction = require("./transaction.js");
+const Statement = require("./statement.js");
 
 class Account {
   constructor(balance, transactions) {
     this.balance = 0;
     this.transactions = [];
   }
-  addTransaction(amount) {
+  addTransaction(amount, date = new Date()) {
     this.balance += amount;
-    const transaction = new Transaction(amount);
-    this.transactions.push(transaction);
+    const transaction = new Transaction(amount, date);
+    const transactionObj = transaction.makeObj();
+    this.transactions.push(transactionObj);
+  }
+  printStatement() {
+    const statement = new Statement(this.transactions);
+    const printOut = statement.generateStatement();
+    console.log(printOut);
   }
 }
 
